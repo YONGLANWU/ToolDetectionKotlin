@@ -1,0 +1,76 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btn_machine"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/button_machine_scan" />
+
+    <EditText
+        android:id="@+id/text_machine"
+        style="@style/barcode_text_style"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/btn_machine"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:focusable="false"
+        android:hint="请扫机台条码" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/barcode_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btn_machine"
+        android:text="挂刀位置:" />
+
+    <Spinner
+        android:id="@+id/positionSpinner"
+        android:layout_width="120dp"
+        android:layout_height="56dp"
+        android:layout_marginLeft="16dp"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_toEndOf="@+id/textView"
+        android:layout_toRightOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/btn_knife"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_cutting_scan" />
+
+    <EditText
+        android:id="@+id/text_knife"
+        style="@style/barcode_text_style"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/btn_knife"
+        android:layout_alignBottom="@+id/btn_knife"
+        android:focusable="false"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:hint="请扫刀把条码" />
+
+    <Button
+        android:id="@+id/btn_ensure"
+        android:layout_width="160dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="32dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_knife"
+        android:background="@drawable/button_click"
+        android:gravity="center"
+        android:enabled="false"
+        android:text="確 定"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+</RelativeLayout>

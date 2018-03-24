@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@android:color/white">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:text="I P地址："
+        android:id="@+id/textView1"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:id="@+id/ipEt"
+        android:paddingLeft="12dp"
+        android:textSize="16sp"
+        android:hint="请输入IP地址"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_toRightOf="@+id/textView1"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:text="端口号："
+        android:id="@+id/textView2"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_below="@+id/textView1"
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:id="@+id/portEt"
+        android:paddingLeft="12dp"
+        android:textSize="16sp"
+        android:inputType="number"
+        android:hint="请输入端口号"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_marginTop="12dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="確 定"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/ensureBtn"
+        android:background="@null"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="12dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="取 消"
+        android:textSize="16sp"
+        android:id="@+id/cancelBtn"
+        android:background="@null"
+        android:layout_alignBottom="@+id/ensureBtn"
+        android:layout_toLeftOf="@+id/ensureBtn"/>
+</RelativeLayout>
