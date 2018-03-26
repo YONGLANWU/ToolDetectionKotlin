@@ -4,7 +4,6 @@ package com.example.fox_04.tooldetectionkotlin.fragment
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import android.support.v4.app.Fragment
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -16,12 +15,17 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.fox_04.tooldetectionkotlin.R
+import com.example.fox_04.tooldetectionkotlin.logi
 import com.example.fox_04.tooldetectionkotlin.presenter.MainPresenterImpl
 import com.example.fox_04.tooldetectionkotlin.showToast
 import com.example.fox_04.tooldetectionkotlin.thread.ClientThread
 import com.example.fox_04.tooldetectionkotlin.utils.SharePreferencesUtil
 import kotlinx.android.synthetic.main.fragment_binding.*
 import java.lang.ref.WeakReference
+import java.util.concurrent.BlockingQueue
+import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.ThreadPoolExecutor
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by fox_04 on 2018/3/24.
@@ -131,13 +135,20 @@ class BindFragment : BaseFragment() , View.OnClickListener{
         positionSpinner.adapter = getSpinnerAdapter(posList)
     }
 
+
     override fun sockerConn() {
         val ip = mPreferencesUtil.getIpId()
         val port = mPreferencesUtil.getPortId()!!.toInt()
         val data = mPreferencesUtil.getUploadDataId()
+        logi("---socket--" , "--")
 
-        val clientThread = ClientThread(mHandler , ip?: "" , port , data?:"")
-        Thread(clientThread).start()
+        val NUMBER_OF_CORES = Runtime.getRuntime().availableProcessors()
+        val KEEP_ALIVE_TIME: Long = 1
+        val KEEP_ALIVE_TIME_UTIT: TimeUnit  = TimeUnit.SECONDS
+        val taskQueue = LinkedBlockingQueue<Runnable>()
+        val executorService = ThreadPoolExecutor(NUMBER_OF_CORES , NUMBER_OF_CORES * 2 ,
+                KEEP_ALIVE_TIME , KEEP_ALIVE_TIME_UTIT , taskQueue)
+        executorService.execute(ClientThread(mHandler , ip?: "" , port , data?:"" , executorService))
     }
 
     override fun createPresenter(): MainPresenterImpl {
@@ -161,7 +172,7 @@ class BindFragment : BaseFragment() , View.OnClickListener{
                       showFailDialog("发送数据给Socket失败")
                   }
               }
-                ClientThread.SOCKET_ERROR ->{
+                ClientThread.SOCKET_ERROR , ClientThread.SOCKET_ERROR ->{
                     showFailDialog("TCP/IP通信失败,请确认ip和端口号")
                 }
                 else ->{
